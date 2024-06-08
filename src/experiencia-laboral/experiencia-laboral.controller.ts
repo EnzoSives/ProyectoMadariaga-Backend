@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ExperienciaLaboralService } from './experiencia-laboral.service';
 import { CreateExperienciaLaboralDto } from './dto/create-experiencia-laboral.dto';
 import { UpdateExperienciaLaboralDto } from './dto/update-experiencia-laboral.dto';
+import { ExperienciaLaboral } from './entities/experiencia-laboral.entity';
 
 @Controller('experiencia-laboral')
 export class ExperienciaLaboralController {
@@ -9,26 +10,26 @@ export class ExperienciaLaboralController {
 
   @Post()
   create(@Body() createExperienciaLaboralDto: CreateExperienciaLaboralDto) {
-    return this.experienciaLaboralService.create(createExperienciaLaboralDto);
+    return this.experienciaLaboralService.addExperienciaLaboral(createExperienciaLaboralDto);
   }
 
-  @Get()
-  findAll() {
-    return this.experienciaLaboralService.findAll();
+  @Get('all')
+  async getExperienciaLaboral():Promise<ExperienciaLaboral[]> {
+    return this.experienciaLaboralService.getAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.experienciaLaboralService.findOne(+id);
+  async getExperienciaLaboralById(@Param('id') id: number): Promise<ExperienciaLaboral> {
+    return this.experienciaLaboralService.getId(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateExperienciaLaboralDto: UpdateExperienciaLaboralDto) {
-    return this.experienciaLaboralService.update(+id, updateExperienciaLaboralDto);
+  updateExperienciaLaboral(@Param('id') id: number, @Body() updateExperienciaLaboralDto: UpdateExperienciaLaboralDto) {
+    return this.experienciaLaboralService.updateExperienciaLaboralDTO(id, updateExperienciaLaboralDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.experienciaLaboralService.remove(+id);
+  removeExperienciaLaboral(@Param('id') id: number): Promise<boolean> {
+    return this.experienciaLaboralService.deleteExperienciaLaboral(id);
   }
 }
