@@ -1,81 +1,81 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('personas')
+@Entity('persona')
 export class Persona {
   @PrimaryGeneratedColumn()
-  private id: number;
+  public id: number;
 
   @Column({ type: 'varchar', length: 255 })
-  private nombre: string;
+  public nombre: string;
 
   @Column({ type: 'varchar', length: 255 })
-  private apellido: string;
+  public apellido: string;
 
   @Column({ type: 'bigint' })
-  private dni: number;
+  public dni: number;
 
   @Column({ type: 'int' })
-  private genero: number;
+  public genero: number;
 
   @Column({ type: 'date' })
-  private fecha_nacimiento: Date;
+  public fecha_nacimiento: Date;
 
   @Column({ type: 'varchar', length: 255 })
-  private lugar_de_nacimiento: string;
+  public lugar_de_nacimiento: string;
 
   @Column({ type: 'varchar', length: 255 })
-  private lugar_de_residencia: string;
+  public lugar_de_residencia: string;
 
   @Column({ type: 'int' })
-  private estadoCivil: number;
+  public estadoCivil: number;
 
   @Column({ type: 'varchar', length: 20 })
-  private cuil: string;
+  public cuil: string;
 
   @Column({ type: 'varchar', length: 255 })
-  private domicilio: string;
+  public domicilio: string;
 
   @Column({ type: 'varchar', length: 255 })
-  private barrio: string;
+  public barrio: string;
 
   @Column({ type: 'int' })
-  private vivienda: number;
+  public vivienda: number;
 
   @Column({ type: 'varchar', length: 255 })
-  private email: string;
+  public email: string;
 
   @Column({ type: 'varchar', length: 20 })
-  private telefono: string;
+  public telefono: string;
 
   @Column({ type: 'boolean' })
-  private empleoActual: boolean;
+  public empleoActual: boolean;
 
   @Column({ type: 'varchar', length: 255, nullable: true })
-  private empleoActualData: string;
+  public empleoActualData: string;
 
   @Column({ type: 'boolean' })
-  private escolaridad: boolean;
+  public escolaridad: boolean;
 
   @Column({ type: 'varchar', length: 255, nullable: true })
-  private escolaridadData: string;
+  public escolaridadData: string;
 
   @Column({ type: 'boolean' })
-  private terciario: boolean;
+  public terciario: boolean;
 
   @Column({ type: 'varchar', length: 255, nullable: true })
-  private terciarioData: string;
+  public terciarioData: string;
 
   @Column({ type: 'boolean' })
-  private universitario: boolean;
+  public universitario: boolean;
 
   @Column({ type: 'boolean' })
-  private curso: boolean;
+  public curso: boolean;
 
   @Column({ type: 'boolean' })
-  private experiencia_laboral: boolean;
+  public experiencia_laboral: boolean;
 
   @Column({ type: 'int' })
-  private id_Imagen: number;
+  public id_Imagen: number;
 
   constructor(
     nombre: string,

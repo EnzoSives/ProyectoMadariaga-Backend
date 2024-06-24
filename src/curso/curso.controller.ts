@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { CursoService } from './curso.service';
-import { CreateCursoDto } from './dto/create-curso.dto';
+import { CursoDto } from './dto/create-curso.dto';
 import { UpdateCursoDto } from './dto/update-curso.dto';
 
 @Controller('curso')
@@ -8,7 +8,7 @@ export class CursoController {
   constructor(private readonly cursoService: CursoService) {}
 
   @Post()
-  create(@Body() createCursoDto: CreateCursoDto) {
+  create(@Body() createCursoDto: CursoDto) {
     return this.cursoService.create(createCursoDto);
   }
 

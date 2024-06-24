@@ -7,11 +7,12 @@ export class Curso {
     @Column()
     nombre: string;
     @Column()
-    puesto: string;
-    @Column()
     desde: Date;
     @Column()
     hasta: Date;
+
+    //id_persona: number;
+    //ManytoOne(persona: Persona)
 
     constructor(nombre: string, desde: Date, hasta: Date) {
         this.nombre = nombre;
