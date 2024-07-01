@@ -2,33 +2,35 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { PostulacionService } from './postulacion.service';
 import { CreatePostulacionDto } from './dto/create-postulacion.dto';
 import { UpdatePostulacionDto } from './dto/update-postulacion.dto';
+import { Postulacion } from './entities/postulacion.entity';
 
 @Controller('postulacion')
 export class PostulacionController {
   constructor(private readonly postulacionService: PostulacionService) {}
 
+
   @Post()
   create(@Body() createPostulacionDto: CreatePostulacionDto) {
-    return this.postulacionService.create(createPostulacionDto);
+    return this.postulacionService.addPostulacion(createPostulacionDto);
   }
 
   @Get()
-  findAll() {
-    return this.postulacionService.findAll();
+  async getPostulacion():Promise<Postulacion[]> {
+    return this.postulacionService.getAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.postulacionService.findOne(+id);
+  async getPostulacionById(@Param('id') id: number): Promise<Postulacion> {
+    return this.postulacionService.getId(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePostulacionDto: UpdatePostulacionDto) {
-    return this.postulacionService.update(+id, updatePostulacionDto);
+  updatePostulacion(@Param('id') id: number, @Body() updatePostulacionDto: UpdatePostulacionDto) {
+    return this.postulacionService.updatePostulacionDTO(id, updatePostulacionDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.postulacionService.remove(+id);
+  removePostulacion(@Param('id') id: number): Promise<boolean> {
+    return this.postulacionService.deletePostulacion(id);
   }
 }

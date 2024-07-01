@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { EmpresaService } from './empresa.service';
 import { CreateEmpresaDto } from './dto/create-empresa.dto';
 import { UpdateEmpresaDto } from './dto/update-empresa.dto';
+import { Empresa } from './entities/empresa.entity';
 
 @Controller('empresa')
 export class EmpresaController {
@@ -9,26 +10,26 @@ export class EmpresaController {
 
   @Post()
   create(@Body() createEmpresaDto: CreateEmpresaDto) {
-    return this.empresaService.create(createEmpresaDto);
+    return this.empresaService.addEmpresa(createEmpresaDto);
   }
 
   @Get()
-  findAll() {
-    return this.empresaService.findAll();
+  async getEmpresa():Promise<Empresa[]> {
+    return this.empresaService.getAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.empresaService.findOne(+id);
+  async getEmpresaById(@Param('id') id: number): Promise<Empresa> {
+    return this.empresaService.getId(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEmpresaDto: UpdateEmpresaDto) {
-    return this.empresaService.update(+id, updateEmpresaDto);
+  updateEmpresa(@Param('id') id: number, @Body() updateEmpresaDto: UpdateEmpresaDto) {
+    return this.empresaService.updateEmpresaDTO(id, updateEmpresaDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.empresaService.remove(+id);
+  removeEmpresa(@Param('id') id: number): Promise<boolean> {
+    return this.empresaService.deleteEmpresa(id);
   }
 }

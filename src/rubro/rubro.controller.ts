@@ -2,33 +2,35 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { RubroService } from './rubro.service';
 import { CreateRubroDto } from './dto/create-rubro.dto';
 import { UpdateRubroDto } from './dto/update-rubro.dto';
+import { Rubro } from './entities/rubro.entity';
 
 @Controller('rubro')
 export class RubroController {
   constructor(private readonly rubroService: RubroService) {}
 
+
   @Post()
   create(@Body() createRubroDto: CreateRubroDto) {
-    return this.rubroService.create(createRubroDto);
+    return this.rubroService.addRubro(createRubroDto);
   }
 
   @Get()
-  findAll() {
-    return this.rubroService.findAll();
+  async getRubro():Promise<Rubro[]> {
+    return this.rubroService.getAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.rubroService.findOne(+id);
+  async getRubroById(@Param('id') id: number): Promise<Rubro> {
+    return this.rubroService.getId(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRubroDto: UpdateRubroDto) {
-    return this.rubroService.update(+id, updateRubroDto);
+  updateRubro(@Param('id') id: number, @Body() updateRubroDto: UpdateRubroDto) {
+    return this.rubroService.updateRubroDTO(id, updateRubroDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.rubroService.remove(+id);
+  removeRubro(@Param('id') id: number): Promise<boolean> {
+    return this.rubroService.deleteRubro(id);
   }
 }
