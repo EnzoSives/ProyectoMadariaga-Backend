@@ -14,9 +14,10 @@ export class ExperienciaLaboral {
     @Column()
     hasta: Date;
 
+
     //id_persona: number;
     //ManytoOne(persona: Persona)
-    
+
     constructor(nombre: string, puesto: string, desde: Date, hasta: Date) {
         this.nombre = nombre;
         this.puesto = puesto;
@@ -38,19 +39,19 @@ export class ExperienciaLaboral {
         return this.hasta;
     }
 
-    public setId(id: number){
+    public setId(id: number) {
         this.id = id;
     }
 
-    public setNombre(nombre: string){
+    public setNombre(nombre: string) {
         this.nombre = nombre;
     }
-    public setDesde(desde: Date){
+    public setDesde(desde: Date) {
         this.desde = desde;
     }
-    public setHasta(hasta: Date){
+    public setHasta(hasta: Date) {
         this.hasta = hasta;
-    } 
+    }
 
 }
 

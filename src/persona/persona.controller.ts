@@ -1,34 +1,36 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus, ParseIntPipe } from '@nestjs/common';
 import { PersonaService } from './persona.service';
 import { CreatePersonaDto } from './dto/create-persona.dto';
 import { UpdatePersonaDto } from './dto/update-persona.dto';
+import { Persona } from './entities/persona.entity';
 
 @Controller('persona')
 export class PersonaController {
   constructor(private readonly personaService: PersonaService) {}
 
-  @Post()
-  create(@Body() createPersonaDto: CreatePersonaDto) {
+  @Post('crear')
+  async addPersona(@Body() createPersonaDto: CreatePersonaDto): Promise<Persona> {
     return this.personaService.create(createPersonaDto);
   }
 
-  @Get()
-  findAll() {
-    return this.personaService.findAll();
+  @Get('all')
+  async getAllPersonas(): Promise<Persona[]> {
+    return this.personaService.getAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.personaService.findOne(+id);
+  async getPersonaById(@Param('id', ParseIntPipe) id: number): Promise<Persona> {
+    return this.personaService.getId(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePersonaDto: UpdatePersonaDto) {
-    return this.personaService.update(+id, updatePersonaDto);
+  @Patch('actualizar/:id')
+  async updatePersona(@Param('id', ParseIntPipe) id: number, @Body() updatePersonaDto: UpdatePersonaDto): Promise<Persona> {
+    return this.personaService.update(id, updatePersonaDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.personaService.remove(+id);
+  @Delete('eliminar/:id')
+  async deletePersona(@Param('id', ParseIntPipe) id: number): Promise<boolean> {
+    await this.personaService.remove(id);
+    return true;
   }
 }
